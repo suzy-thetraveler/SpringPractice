@@ -7,8 +7,11 @@ import hello.core.order.OrderSevice;
 
 public class OrderApp {
     public static void main(String[] args) {
-        OrderSevice orderSevice = new OrderServiceImpl(memberRepository, discountPolicy);
-        MemberService memberService = new MemberServiceImpl(memberRepository);
+
+        AppConfig appConfig = new AppConfig();
+
+        MemberService memberService = appConfig.memberService();
+        OrderSevice orderSevice = appConfig.orderSevice();
 
         Long memberId = 1L;
         Member member = new Member(memberId, "suzy", Grade.VIP);
