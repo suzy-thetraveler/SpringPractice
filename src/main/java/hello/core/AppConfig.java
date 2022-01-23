@@ -8,23 +8,30 @@ import hello.core.member.MemberServiceImpl;
 import hello.core.member.MemoryMemberRepository;
 import hello.core.order.OrderServiceImpl;
 import hello.core.order.OrderSevice;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 //application 전체를 설정하고 구성한다는  뜻, application 환경구성에 관한 건 여기서 다 한다.
+@Configuration
 public class AppConfig {
 
+    @Bean
     public MemberRepository memberRepository(){
         return new MemoryMemberRepository();
     }
 
+    @Bean
     public DiscountPolicy discountPolicy(){
         return new FixedDiscountPolicy();
     }
 
+    @Bean
     public MemberService memberService(){
         return new MemberServiceImpl(memberRepository());
     }
 
-    public OrderSevice orderSevice(){
+    @Bean
+    public OrderSevice orderService(){
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
